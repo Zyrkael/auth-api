@@ -1,6 +1,6 @@
-@auth-api_HostAddress = http://localhost:5184
+@auth_api_HostAddress = http://localhost:5184
 
-POST {{auth-api_HostAddress}}/auth/login
+POST {{auth_api_HostAddress}}/auth/login
 Content-Type: application/json
 
 {
@@ -9,7 +9,7 @@ Content-Type: application/json
 
 ###
 
-POST {{auth-api_HostAddress}}/auth/register
+POST {{auth_api_HostAddress}}/auth/register
 Content-Type: application/json
 
 {

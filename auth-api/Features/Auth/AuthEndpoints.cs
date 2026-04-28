@@ -9,8 +9,7 @@ public static class AuthEndpoints
     public static IEndpointRouteBuilder MapAuthEndpoints(this IEndpointRouteBuilder app)
     {
         var authGroup = app.MapGroup("/auth")
-            .WithTags("Authentication")
-            .WithOpenApi();
+            .WithTags("Authentication");
 
         authGroup.MapPost("/login", async (Login_Request request, IAuthService authService) =>
         {
