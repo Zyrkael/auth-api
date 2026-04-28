@@ -15,7 +15,7 @@ public static class AuthEndpoints
         authGroup.MapPost("/login", async (Login_Request request, IAuthService authService) =>
         {
             var response = await authService.LoginAsync(request);
-            return Results.Ok(BaseResponse<Login_Response>.Success(response, status: 200));
+            return Results.Ok(BaseResponse<Login_Response>.Success(response, status: StatusCodes.Status200OK));
         })
         .WithName("Login")
         .WithSummary("Đăng nhập người dùng")
@@ -29,7 +29,7 @@ public static class AuthEndpoints
         {
             // Placeholder for registration logic
             var message = "Đăng ký thành công";
-            return Results.Ok(BaseResponse<string>.Success(null, message, status: 200));
+            return Results.Ok(BaseResponse<string>.Success(null, message, status: StatusCodes.Status200OK));
         })
         .WithName("Register")
         .WithSummary("Đăng ký người dùng")

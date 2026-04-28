@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Http;
+
 namespace auth_api.Dtos.Common;
 
 public class BaseResponse<T>
@@ -6,7 +8,7 @@ public class BaseResponse<T>
     public string Message { get; set; } = string.Empty;
     public T? Data { get; set; }
 
-    public static BaseResponse<T> Success(T? data, string message = "Thành công", int status = 0)
+    public static BaseResponse<T> Success(T? data, string message = "Thành công", int status = StatusCodes.Status200OK)
     {
         return new BaseResponse<T> { Status = status, Message = message, Data = data };
     }
