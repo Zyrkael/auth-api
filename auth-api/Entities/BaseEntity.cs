@@ -1,6 +1,8 @@
 ﻿namespace auth_api.Entities;
 
-public class BaseEntity
+public abstract class BaseEntity
 {
-    public Guid Id { get; set; } = Guid.NewGuid();
+    public Guid Id { get; set; }
+    public DateTime CreatedAt { get; set; }
 }
+
