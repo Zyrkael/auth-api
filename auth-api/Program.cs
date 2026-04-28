@@ -1,24 +1,18 @@
-using auth_api.Contexts;
-using auth_api.Features.Weather;
-using Microsoft.EntityFrameworkCore;
+using auth_api.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
+builder.Services.AddDatabase(builder.Configuration);
 
-builder.Services.AddScoped<IAppDbContext>(sp =>
-    sp.GetRequiredService<AppDbContext>());
+builder.Services.AddApplicationServices();
 
 
 var app = builder.Build();
 
 app.UseHttpsRedirection();
 
-app.MapWeatherEndpoints();
+app.MapApplicationEndpoints();
 
 app.Run();
