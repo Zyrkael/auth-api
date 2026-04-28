@@ -3,9 +3,17 @@ using System.Text.RegularExpressions;
 
 namespace auth_api.Utils.Security;
 
+/// <summary>
+/// Cung cấp các phương thức hỗ trợ kiểm tra tính hợp lệ của dữ liệu (Email, Số điện thoại, v.v.).
+/// </summary>
 public static class ValidationHelper
 {
     // ===================== EMAIL =====================
+    /// <summary>
+    /// Kiểm tra xem một chuỗi có phải là định dạng Email hợp lệ hay không.
+    /// </summary>
+    /// <param name="email">Chuỗi email cần kiểm tra.</param>
+    /// <returns>True nếu email hợp lệ, ngược lại là false.</returns>
     public static bool IsValidEmail(string email)
     {
         if (string.IsNullOrWhiteSpace(email))
@@ -23,6 +31,12 @@ public static class ValidationHelper
     }
 
     // ===================== PHONE (VIETNAM) =====================
+    /// <summary>
+    /// Kiểm tra xem một chuỗi có phải là số điện thoại Việt Nam hợp lệ hay không.
+    /// Chấp nhận các định dạng: 0x, +84x, 84x với x là các đầu số 3, 5, 7, 8, 9.
+    /// </summary>
+    /// <param name="phone">Chuỗi số điện thoại cần kiểm tra.</param>
+    /// <returns>True nếu số điện thoại hợp lệ, ngược lại là false.</returns>
     public static bool IsValidVietnamPhone(string phone)
     {
         if (string.IsNullOrWhiteSpace(phone))
@@ -39,6 +53,11 @@ public static class ValidationHelper
     }
 
     // ===================== NORMALIZE PHONE =====================
+    /// <summary>
+    /// Chuẩn hóa số điện thoại Việt Nam về định dạng chuẩn (bỏ khoảng trắng và các ký tự đặc biệt).
+    /// </summary>
+    /// <param name="phone">Chuỗi số điện thoại cần chuẩn hóa.</param>
+    /// <returns>Chuỗi số điện thoại đã được chuẩn hóa.</returns>
     public static string NormalizeVietnamPhone(string phone)
     {
         if (string.IsNullOrWhiteSpace(phone))
