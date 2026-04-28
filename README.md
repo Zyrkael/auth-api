@@ -1,7 +1,7 @@
 # auth-api
 
 A lightweight **ASP.NET Core** authentication API example written in C#.
-
+Target framework: **.NET 10**
 ## 📦 Project structure
 ```
 /auth-api
@@ -40,7 +40,7 @@ A lightweight **ASP.NET Core** authentication API example written in C#.
 
 ## 🚀 Getting started
 1. **Prerequisites**
-   - .NET 8 SDK (or newer, the project targets .NET 8)
+   - .NET 10 SDK (or newer, the project targets .NET 10)
    - A SQL Server instance if you plan to add persistence
 2. **Clone the repo**
    ```bash
