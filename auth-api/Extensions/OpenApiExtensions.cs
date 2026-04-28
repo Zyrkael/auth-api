@@ -1,17 +1,12 @@
-using auth_api.Contexts;
-using auth_api.Features.Auth;
-using auth_api.Services.Auth;
-using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 
 namespace auth_api.Extensions;
 
-public static class AppExtensions
+public static class OpenApiExtensions
 {
-    public static void AddInfrastructure(this WebApplicationBuilder builder)
+    public static void AddOpenApiDocumentation(this IServiceCollection services)
     {
-        // OpenAPI & Scalar Documentation
-        builder.Services.AddOpenApi(options =>
+        services.AddOpenApi(options =>
         {
             options.AddDocumentTransformer((document, context, cancellationToken) =>
             {
@@ -21,18 +16,10 @@ public static class AppExtensions
                 return Task.CompletedTask;
             });
         });
-        builder.Services.AddEndpointsApiExplorer();
-
-        // Database
-        builder.Services.AddDbContext<AppDbContext>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-        builder.Services.AddScoped<IAppDbContext>(sp => sp.GetRequiredService<AppDbContext>());
-
-        // Services
-        builder.Services.AddScoped<IAuthService, AuthService>();
+        services.AddEndpointsApiExplorer();
     }
 
-    public static void UseAppMiddleware(this WebApplication app)
+    public static void UseOpenApiDocumentation(this WebApplication app)
     {
         if (app.Environment.IsDevelopment())
         {
@@ -43,7 +30,6 @@ public static class AppExtensions
                 options.Layout = ScalarLayout.Modern;
                 options.Theme = ScalarTheme.DeepSpace;
 
-                // Cấu hình Font JetBrains Mono
                 options.WithDefaultFonts(false);
                 options.CustomCss = @"
                     @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
@@ -55,7 +41,6 @@ public static class AppExtensions
                     }
                 ";
 
-                // Các cấu hình bổ sung từ JSON
                 options.WithSidebar(true)
                        .WithModels(true)
                        .WithDownloadButton(true)
@@ -64,8 +49,5 @@ public static class AppExtensions
                 options.HideClientButton = false;
             });
         }
-
-        app.UseHttpsRedirection();
-        app.MapAuthEndpoints();
     }
 }

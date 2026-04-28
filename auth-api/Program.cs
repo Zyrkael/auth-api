@@ -2,10 +2,16 @@ using auth_api.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.AddInfrastructure();
+// Add Services
+builder.Services.AddOpenApiDocumentation();
+builder.Services.AddDatabaseContext(builder.Configuration);
+builder.Services.AddApplicationServices();
 
 var app = builder.Build();
 
-app.UseAppMiddleware();
+// Configure Pipeline
+app.UseOpenApiDocumentation();
+app.UseHttpsRedirection();
+app.MapAppEndpoints();
 
 app.Run();
