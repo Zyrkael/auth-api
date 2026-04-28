@@ -1,3 +1,4 @@
+using auth_api.Configurations;
 using auth_api.Contexts;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,12 +8,12 @@ public static class DatabaseExtensions
 {
     public static void AddDatabaseContext(this IServiceCollection services, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("DefaultConnection");
-        var dbProvider = configuration.GetSection("ConnectionStrings")["DbProvider"];
+        var connectionString = configuration.GetConnectionString(AppConstants.ConnectionStrings.DefaultConnection);
+        var dbProvider = configuration.GetSection(AppConstants.ConnectionStrings.SectionName)[AppConstants.ConnectionStrings.DbProvider];
 
         services.AddDbContext<AppDbContext>(options =>
         {
-            if (dbProvider?.Equals("MySql", StringComparison.OrdinalIgnoreCase) == true)
+            if (dbProvider?.Equals(AppConstants.DbProviders.MySql, StringComparison.OrdinalIgnoreCase) == true)
             {
                 options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
             }
