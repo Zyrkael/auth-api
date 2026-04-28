@@ -5,7 +5,8 @@ public static class AppConstants
     public static class ConnectionStrings
     {
         public const string SectionName = "ConnectionStrings";
-        public const string DefaultConnection = "DefaultConnection";
+        public const string SqlServerConnection = "SqlServerConnection";
+        public const string MySqlConnection = "MySqlConnection";
         public const string DbProvider = "DbProvider";
     }
 
