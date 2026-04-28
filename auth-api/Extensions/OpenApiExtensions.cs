@@ -30,7 +30,7 @@ public static class OpenApiExtensions
                 options.Layout = ScalarLayout.Modern;
                 options.Theme = ScalarTheme.DeepSpace;
 
-                options.WithDefaultFonts(false);
+                options.DisableDefaultFonts();
                 options.CustomCss = @"
                     @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
                     :root {
@@ -40,11 +40,6 @@ public static class OpenApiExtensions
                         font-family: 'JetBrains Mono', monospace !important;
                     }
                 ";
-
-                options.WithSidebar(true)
-                       .WithModels(true)
-                       .WithDownloadButton(true)
-                       .WithTestRequestButton(false);
                 
                 options.HideClientButton = false;
             });

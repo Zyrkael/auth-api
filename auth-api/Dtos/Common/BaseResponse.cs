@@ -6,9 +6,9 @@ public class BaseResponse<T>
     public string Message { get; set; } = string.Empty;
     public T? Data { get; set; }
 
-    public static BaseResponse<T> Success(T? data, string message = "Thành công")
+    public static BaseResponse<T> Success(T? data, string message = "Thành công", int status = 0)
     {
-        return new BaseResponse<T> { Status = 0, Message = message, Data = data };
+        return new BaseResponse<T> { Status = status, Message = message, Data = data };
     }
 
     public static BaseResponse<T> Failure(string message, int status = 1)
