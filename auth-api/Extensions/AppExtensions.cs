@@ -39,9 +39,29 @@ public static class AppExtensions
             app.MapOpenApi();
             app.MapScalarApiReference("/docs", options =>
             {
-                options.Title = "Auth Docs 🚀";
+                options.Title = "Auth API v1 🚀";
                 options.Layout = ScalarLayout.Modern;
                 options.Theme = ScalarTheme.DeepSpace;
+
+                // Cấu hình Font JetBrains Mono
+                options.WithDefaultFonts(false);
+                options.CustomCss = @"
+                    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+                    :root {
+                        --scalar-font: 'JetBrains Mono', monospace;
+                    }
+                    code, kbd, samp, pre {
+                        font-family: 'JetBrains Mono', monospace !important;
+                    }
+                ";
+
+                // Các cấu hình bổ sung từ JSON
+                options.WithSidebar(true)
+                       .WithModels(true)
+                       .WithDownloadButton(true)
+                       .WithTestRequestButton(false);
+                
+                options.HideClientButton = false;
             });
         }
 
