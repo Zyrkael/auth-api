@@ -1,17 +1,17 @@
 namespace auth_api.Dtos.Auth.Requests;
 
 /// <summary>
-/// Represents a user's request to log in.
+/// Đại diện cho yêu cầu đăng nhập của người dùng.
 /// </summary>
-public class Login_Request
+public abstract class LoginRequest
 {
     /// <summary>
-    /// The username of the user.
+    /// Tên đăng nhập của người dùng.
     /// </summary>
     public string Username { get; set; } = string.Empty;
 
     /// <summary>
-    /// The password of the user.
+    /// Mật khẩu của người dùng.
     /// </summary>
     public string Password { get; set; } = string.Empty;
 }

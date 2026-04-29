@@ -1,22 +1,22 @@
 namespace auth_api.Dtos.Auth.Requests;
 
 /// <summary>
-/// Represents a user's request to register a new account.
+/// Đại diện cho yêu cầu đăng ký tài khoản mới của người dùng.
 /// </summary>
-public class Register_Request
+public abstract class RegisterRequest
 {
     /// <summary>
-    /// The username for the new account.
+    /// Tên đăng nhập cho tài khoản mới.
     /// </summary>
     public string Username { get; set; } = string.Empty;
 
     /// <summary>
-    /// The password for the new account.
+    /// Mật khẩu cho tài khoản mới.
     /// </summary>
     public string Password { get; set; } = string.Empty;
 
     /// <summary>
-    /// The email address for the new account.
+    /// Địa chỉ email cho tài khoản mới.
     /// </summary>
     public string Email { get; set; } = string.Empty;
 }

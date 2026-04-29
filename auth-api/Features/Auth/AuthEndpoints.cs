@@ -12,20 +12,20 @@ public static class AuthEndpoints
         var authGroup = app.MapGroup("/auth")
             .WithTags("Authentication");
 
-        authGroup.MapPost("/login", async (Login_Request request, IAuthService authService) =>
+        authGroup.MapPost("/login", async (LoginRequest request, IAuthService authService) =>
         {
             var response = await authService.LoginAsync(request);
-            return Results.Ok(BaseResponse<Login_Response>.Success(response, status: StatusCodes.Status200OK));
+            return Results.Ok(BaseResponse<LoginResponse>.Success(response, status: StatusCodes.Status200OK));
         })
         .WithName("Login")
         .WithSummary("Đăng nhập người dùng")
         .WithDescription("Xác thực người dùng và trả về mã thông báo JWT.")
-        .Accepts<Login_Request>("application/json")
-        .Produces<BaseResponse<Login_Response>>(StatusCodes.Status200OK)
+        .Accepts<LoginRequest>("application/json")
+        .Produces<BaseResponse<LoginResponse>>(StatusCodes.Status200OK)
         .Produces<BaseResponse<object>>(StatusCodes.Status401Unauthorized)
         .Produces<BaseResponse<object>>(StatusCodes.Status400BadRequest);
 
-        authGroup.MapPost("/register", async (Register_Request request, IAuthService authService) =>
+        authGroup.MapPost("/register", async (RegisterRequest request, IAuthService authService) =>
         {
             // Placeholder for registration logic
             var message = "Đăng ký thành công";
@@ -34,7 +34,7 @@ public static class AuthEndpoints
         .WithName("Register")
         .WithSummary("Đăng ký người dùng")
         .WithDescription("Đăng ký tài khoản người dùng mới vào hệ thống.")
-        .Accepts<Register_Request>("application/json")
+        .Accepts<RegisterRequest>("application/json")
         .Produces<BaseResponse<string>>(StatusCodes.Status200OK)
         .Produces<BaseResponse<object>>(StatusCodes.Status400BadRequest);
     }

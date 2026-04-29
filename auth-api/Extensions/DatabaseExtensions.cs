@@ -8,18 +8,18 @@ public static class DatabaseExtensions
 {
     public static void AddDatabaseContext(this IServiceCollection services, IConfiguration configuration)
     {
-        var dbProvider = configuration.GetSection(AppConstants.ConnectionStrings.SECTION_NAME)[AppConstants.ConnectionStrings.DB_PROVIDER];
+        var dbProvider = configuration.GetSection(AppConstants.ConnectionStrings.SectionName)[AppConstants.ConnectionStrings.DbProvider];
 
         services.AddDbContext<AppDbContext>(options =>
         {
-            if (dbProvider?.Equals(AppConstants.DbProviders.MY_SQL, StringComparison.OrdinalIgnoreCase) == true)
+            if (dbProvider?.Equals(AppConstants.DbProviders.MySql, StringComparison.OrdinalIgnoreCase) == true)
             {
-                var connectionString = configuration.GetConnectionString(AppConstants.ConnectionStrings.MY_SQL_CONNECTION);
+                var connectionString = configuration.GetConnectionString(AppConstants.ConnectionStrings.MySqlConnection);
                 options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
             }
             else
             {
-                var connectionString = configuration.GetConnectionString(AppConstants.ConnectionStrings.SQL_SERVER_CONNECTION);
+                var connectionString = configuration.GetConnectionString(AppConstants.ConnectionStrings.SqlServerConnection);
                 options.UseSqlServer(connectionString);
             }
         });
