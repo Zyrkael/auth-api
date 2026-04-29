@@ -30,13 +30,13 @@ public class AuthService(IAppDbContext dbContext) : IAuthService
 
         if (!isValidEmail)
         {
-            throw new ArgumentException("Email không hợp lệ.");
+            return BaseResponse<RegisterResponse>.Failure("Email không hợp lệ.", StatusCodes.Status400BadRequest);
         }
 
         var isUserExist = await dbContext.Users.AnyAsync(u => u.Email == request.Email || u.UserName == request.Username, cancellationToken);
         if (isUserExist)
         {
-            throw new ArgumentException("Tên đăng nhập hoặc Email đã tồn tại.");
+            return BaseResponse<RegisterResponse>.Failure("Tên đăng nhập hoặc Email đã tồn tại.", StatusCodes.Status400BadRequest);
         }
 
         var user = new User
