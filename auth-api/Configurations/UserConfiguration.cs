@@ -21,5 +21,10 @@ public class UserConfiguration : BaseEntityConfiguration<User>
             .HasColumnName("password")
             .IsRequired()
             .HasMaxLength(255);
+        
+        builder.Property(x => x.Email)
+            .HasColumnName("email")
+            .IsRequired()
+            .HasMaxLength(255);
     }
 }
