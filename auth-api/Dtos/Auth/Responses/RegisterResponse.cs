@@ -3,7 +3,7 @@ namespace auth_api.Dtos.Auth.Responses;
 /// <summary>
 /// Đại diện cho phản hồi được trả về sau khi đăng ký thành công.
 /// </summary>
-public abstract class RegisterResponse
+public class RegisterResponse
 {
 
     /// <summary>
