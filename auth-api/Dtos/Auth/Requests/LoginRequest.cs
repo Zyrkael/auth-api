@@ -3,7 +3,7 @@ namespace auth_api.Dtos.Auth.Requests;
 /// <summary>
 /// Đại diện cho yêu cầu đăng nhập của người dùng.
 /// </summary>
-public abstract class LoginRequest
+public class LoginRequest
 {
     /// <summary>
     /// Tên đăng nhập của người dùng.

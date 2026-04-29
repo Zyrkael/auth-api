@@ -3,7 +3,7 @@ namespace auth_api.Dtos.Auth.Requests;
 /// <summary>
 /// Đại diện cho yêu cầu đăng ký tài khoản mới của người dùng.
 /// </summary>
-public abstract class RegisterRequest
+public class RegisterRequest
 {
     /// <summary>
     /// Tên đăng nhập cho tài khoản mới.

@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Http;
-
 namespace auth_api.Dtos.Common;
 
 public class BaseResponse<T>

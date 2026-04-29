@@ -15,7 +15,7 @@ public static class AuthEndpoints
         authGroup.MapPost("/login", async (LoginRequest request, IAuthService authService) =>
         {
             var response = await authService.LoginAsync(request);
-            return Results.Ok(BaseResponse<LoginResponse>.Success(response, status: StatusCodes.Status200OK));
+            return Results.Ok(response);
         })
         .WithName("Login")
         .WithSummary("Đăng nhập người dùng")
@@ -25,17 +25,16 @@ public static class AuthEndpoints
         .Produces<BaseResponse<object>>(StatusCodes.Status401Unauthorized)
         .Produces<BaseResponse<object>>(StatusCodes.Status400BadRequest);
 
-        authGroup.MapPost("/register", async (RegisterRequest request, IAuthService authService) =>
+        authGroup.MapPost("/register", async (RegisterRequest request, IAuthService authService, CancellationToken cancellationToken) =>
         {
-            // Placeholder for registration logic
-            var message = "Đăng ký thành công";
-            return Results.Ok(BaseResponse<string>.Success(null, message, status: StatusCodes.Status200OK));
+            var response = await authService.RegisterAsync(request, cancellationToken);
+            return Results.Created($"/auth/register", response);
         })
         .WithName("Register")
         .WithSummary("Đăng ký người dùng")
         .WithDescription("Đăng ký tài khoản người dùng mới vào hệ thống.")
         .Accepts<RegisterRequest>("application/json")
-        .Produces<BaseResponse<string>>(StatusCodes.Status200OK)
+        .Produces<BaseResponse<RegisterResponse>>(StatusCodes.Status201Created)
         .Produces<BaseResponse<object>>(StatusCodes.Status400BadRequest);
     }
 }

@@ -1,5 +1,6 @@
 using auth_api.Dtos.Auth.Requests;
 using auth_api.Dtos.Auth.Responses;
+using auth_api.Dtos.Common;
 using auth_api.Utils.Security;
 
 using auth_api.Contexts;
@@ -10,7 +11,7 @@ namespace auth_api.Services.Auth;
 
 public class AuthService(IAppDbContext dbContext) : IAuthService
 {
-    public Task<LoginResponse> LoginAsync(LoginRequest request)
+    public Task<BaseResponse<LoginResponse>> LoginAsync(LoginRequest request)
     {
         // TODO: validate credentials against DB, generate JWT
         var response = new LoginResponse
@@ -18,10 +19,10 @@ public class AuthService(IAppDbContext dbContext) : IAuthService
             Token = "dummy-token",
             Expiration = DateTime.UtcNow.AddHours(1)
         };
-        return Task.FromResult(response);
+        return Task.FromResult(BaseResponse<LoginResponse>.Success(response));
     }
 
-    public async Task<RegisterResponse> RegisterAsync(RegisterRequest request, CancellationToken cancellationToken = default)
+    public async Task<BaseResponse<RegisterResponse>> RegisterAsync(RegisterRequest request, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
 
@@ -50,9 +51,11 @@ public class AuthService(IAppDbContext dbContext) : IAuthService
         await dbContext.Users.AddAsync(user, cancellationToken);
         await dbContext.SaveChangesAsync(cancellationToken);
 
-        return new RegisterResponse
+        var response = new RegisterResponse
         {
             Avatar = $"https://ui-avatars.com/api/?name={request.Username}"
         };
+
+        return BaseResponse<RegisterResponse>.Success(response, "Đăng ký thành công", StatusCodes.Status201Created);
     }
 }
